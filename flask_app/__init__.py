@@ -5,6 +5,7 @@ from flask_app.blueprints.auth import bp as auth
 from flask_app.blueprints.dist_cents import bp as dcs
 from flask_app.blueprints.users import bp as users
 from flask_app.blueprints.assets import bp as assets
+from flask_app.blueprints.customers import bp as customers
 from flask_app.blueprints.navigation import bp as navigation
 from flask_app.blueprints.schedules import bp as schedules
 from flask_app.extensions import bcrypt, db, login_manager
@@ -28,6 +29,7 @@ def create_app():
     app.register_blueprint(dcs)
     app.register_blueprint(users)
     app.register_blueprint(assets)
+    app.register_blueprint(customers)
     app.register_blueprint(navigation)
     app.register_blueprint(schedules)
 
@@ -38,6 +40,11 @@ def create_app():
     with app.app_context():
         from flask_app.models.user import User
         from flask_app.models.distribution_center import DistributionCenter
+        from flask_app.models.driver import Driver
+        from flask_app.models.truck import Truck
+        from flask_app.models.customer import Customer
+        from flask_app.models.address import Address
+        from flask_app.models.schedule import Schedule
 
         db.create_all()
 

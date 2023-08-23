@@ -61,6 +61,20 @@ text-decoration:none;
 transition:all .1s linear;
 }
 
+.main-menu li>button {
+  position:relative;
+  display:table;
+  border-collapse:collapse;
+  border-spacing:0;
+  color:#16DB93;
+  font-family: arial;
+  font-size: 14px;
+  text-decoration:none;
+  -webkit-transform:translateZ(0) scale(1,1);
+  -webkit-transition:all .1s linear;
+  transition:all .1s linear;
+  }
+
 .main-menu .nav-icon {
 position:relative;
 display:table-cell;
@@ -94,7 +108,7 @@ overflow-y:auto;
 overflow:visible;
 }
 
-a:hover,a:focus {
+a:hover,a:focus,button:hover,button:focus {
 text-decoration:none;
 }
 

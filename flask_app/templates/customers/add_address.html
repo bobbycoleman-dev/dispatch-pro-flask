@@ -1,0 +1,19 @@
+<form action="/customers/customer_settings" method="post">
+	{{ address_form.csrf_token }}
+	<div class="mb-3">
+		{{ address_form.customer_id.label(class="form-label") }} {{ address_form.customer_id(class="form-control") }}
+	</div>
+	<div class="mb-3">
+		{{ address_form.street.label(class="form-label") }} {{ address_form.street(class="form-control") }}
+	</div>
+	<div class="mb-3">
+		{{ address_form.city.label(class="form-label") }} {{ address_form.city(class="form-control") }}
+	</div>
+	<div class="mb-3">
+		{{ address_form.state.label(class="form-label") }} {{ address_form.state(class="form-control") }}
+	</div>
+	<div class="mb-3">
+		{{ address_form.zip_code.label(class="form-label") }} {{ address_form.zip_code(class="form-control") }}
+	</div>
+	<div class="text-end"><button type="submit" class="btn btn-success">Create</button></div>
+</form>

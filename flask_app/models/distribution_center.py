@@ -7,6 +7,7 @@ from sqlalchemy.sql import func
 class DistributionCenter(db.Model):
     __tablename__ = "distribution_centers"
     query = db.session.query_property()
+    session = db.session
 
     id = Column(Integer, primary_key=True, autoincrement="auto")
     nickname = Column(String(45), nullable=False)

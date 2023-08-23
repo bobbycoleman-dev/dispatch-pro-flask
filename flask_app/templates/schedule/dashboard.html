@@ -1,0 +1,75 @@
+{% extends '/shared/base.html' %} {% block content %} {% include '/shared/navbar.html' %}
+
+<div class="container">
+	<div class="container overflow-scroll pt-5 ps-5" style="height: 100vh">
+		<div class="mb-3 d-flex justify-content-between">
+			<div class="btn-group" role="group">
+				<button
+					id="btnGroupDrop2"
+					type="button"
+					class="btn btn-success dropdown-toggle"
+					data-bs-toggle="dropdown"
+					aria-haspopup="true"
+					aria-expanded="false">
+					Filter Truck
+				</button>
+				<div class="dropdown-menu" aria-labelledby="btnGroupDrop2" style="">
+					{% for truck in trucks %}
+					<a class="dropdown-item" href="#"> Truck: {{truck.number}}, {{truck.truck_driver.first_name}} </a>
+					{% endfor %}
+				</div>
+			</div>
+			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#creat-schedule">
+				Create Schedule
+			</button>
+			<button class="btn btn-success">Share <i class="bi-box-arrow-up-right"></i></button>
+		</div>
+		{% include '/schedule/schedule.html' %}
+	</div>
+</div>
+{# CREATE SCHEDULE MODAL #}
+<div class="modal fade" id="creat-schedule" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">Create Schedule</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form action="/dashboard" method="post">
+					{{ schedule_form.csrf_token }}
+					<div class="mb-3">
+						{{ schedule_form.truck_id.label(class="form-label") }} {{
+						schedule_form.truck_id(class="form-control") }}
+					</div>
+					<div class="mb-3">
+						{{ schedule_form.start_date.label(class="form-label") }} {{
+						schedule_form.start_date(class="form-control") }}
+					</div>
+					<div class="mb-3">
+						{{ schedule_form.first_run_stops.label(class="form-label") }} {{
+						schedule_form.first_run_stops(class="form-control") }}
+					</div>
+					<div class="mb-3">
+						{{schedule_form.has_second_runs.label(class="form-label")}} {% for subfield in
+						schedule_form.has_second_runs %}
+						<tr>
+							<td>{{subfield}}</td>
+							<td>{{subfield.label}}</td>
+						</tr>
+						{% endfor %}
+					</div>
+					<div class="mb-3">
+						{{ schedule_form.second_run_stops.label(class="form-label") }} {{
+						schedule_form.second_run_stops(class="form-control") }}
+					</div>
+					<div class="text-end">
+						<button type="submit" class="btn btn-success" data-bs-dismiss="modal">Create</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

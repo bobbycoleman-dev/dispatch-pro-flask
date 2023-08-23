@@ -6,16 +6,6 @@ from flask_app.models.dc_region import DCRegion
 bp = Blueprint("navigation", __name__)
 
 
-@bp.get("/dashboard")
-def dashboard():
-    regions = DCRegion().south
-    current_user.region = (
-        "south" if current_user.user_dc.state in regions else "northeast"
-    )
-
-    return render_template("dashboard.html")
-
-
 @bp.route("/settings")
 def go_to_settings():
     roles = Role().roles

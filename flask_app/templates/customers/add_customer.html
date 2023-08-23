@@ -1,0 +1,19 @@
+<form action="/customers/customer_settings" method="post">
+	{{ customer_form.csrf_token }} {{customer_form.dc_id}}
+	<div class="mb-3">
+		{{ customer_form.company_name.label(class="form-label") }} {{ customer_form.company_name(class="form-control")
+		}}
+	</div>
+	<div class="mb-3">
+		{{ customer_form.poc_first_name.label(class="form-label") }} {{
+		customer_form.poc_first_name(class="form-control") }}
+	</div>
+	<div class="mb-3">
+		{{ customer_form.poc_last_name.label(class="form-label") }} {{ customer_form.poc_last_name(class="form-control")
+		}}
+	</div>
+	<div class="mb-3">
+		{{ customer_form.poc_number.label(class="form-label") }} {{ customer_form.poc_number(class="form-control") }}
+	</div>
+	<div class="text-end"><button type="submit" class="btn btn-success">Create</button></div>
+</form>
