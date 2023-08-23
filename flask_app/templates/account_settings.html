@@ -1,0 +1,14 @@
+{% extends '/shared/base.html' %} {% block content %} {% include '/shared/navbar.html' %}
+
+<div class="container">
+	<div class="container overflow-scroll pt-5 ps-5" style="height: 100vh">
+		<h3 class="text-end">Settings</h3>
+		<h4 class="text-center">{{ current_user.first_name }} {{ current_user.last_name }}</h4>
+		<h5 class="text-center">
+			{% for role_id in roles %} {% if current_user.role in role_id %} {{ role_id[current_user.role] }}
+			({{current_user.region}} Region) {% endif %} {% endfor %}
+		</h5>
+	</div>
+</div>
+
+{% endblock content %}

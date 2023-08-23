@@ -1,0 +1,77 @@
+<div class="area"></div>
+<nav class="main-menu">
+	<ul>
+		<li>
+			<a href="/dashboard">
+				<i class="fa bi-truck fs-5"></i>
+				<span class="nav-text"> Dispatch Pro </span>
+			</a>
+		</li>
+		<li class="has-subnav">
+			<a href="/dashboard">
+				<i class="fa bi-building-fill fs-5"></i>
+				<span class="nav-text"> {{current_user.user_dc.nickname}} </span>
+			</a>
+		</li>
+		<li class="has-subnav">
+			<a href="/dashboard">
+				<i class="fa bi-calendar3 fs-5"></i>
+				<span class="nav-text"> Schedule </span>
+			</a>
+		</li>
+		<li class="has-subnav">
+			<a href="/assets/asset_settings">
+				<i class="fa bi-truck fs-5"></i>
+				<span class="nav-text"> Vehicles/Drivers </span>
+			</a>
+		</li>
+		<li class="has-subnav">
+			<a href="#">
+				<i class="fa bi-geo-alt-fill fs-5"></i>
+				<span class="nav-text"> Route Map </span>
+			</a>
+		</li>
+		<li>
+			<a href="#">
+				<i class="fa bi-people-fill fs-5"></i>
+				<span class="nav-text"> Customers </span>
+			</a>
+		</li>
+		<li>
+			<a href="#">
+				<i class="fa bi-graph-up fs-5"></i>
+				<span class="nav-text"> Reports </span>
+			</a>
+		</li>
+		{% if current_user.role == 1 %}
+
+		<li>
+			<a href="/users/user_settings">
+				<i class="fa bi-person-fill-gear fs-5"></i>
+				<span class="nav-text"> User Settings </span>
+			</a>
+		</li>
+		<li>
+			<a href="/dcs/dc_settings">
+				<i class="fa bi-building-fill-gear fs-5"></i>
+				<span class="nav-text"> DC Settings </span>
+			</a>
+		</li>
+		{% endif %}
+	</ul>
+
+	<ul class="logout">
+		<li>
+			<a href="/settings">
+				<i class="fa bi-gear fs-3"></i>
+				<span class="nav-text"> {{current_user.first_name}} {{current_user.last_name}} </span>
+			</a>
+		</li>
+		<li>
+			<a href="/auth/logout">
+				<i class="fa bi-power fs-3"></i>
+				<span class="nav-text"> Logout </span>
+			</a>
+		</li>
+	</ul>
+</nav>

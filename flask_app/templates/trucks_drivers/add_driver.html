@@ -1,0 +1,24 @@
+<form action="/assets/create/driver" method="post">
+	{{ driver_form.csrf_token }}
+	<div class="mb-3">
+		{{ driver_form.first_name.label(class="form-label") }} {{ driver_form.first_name(class="form-control") }}
+	</div>
+	<div class="mb-3">
+		{{ driver_form.last_name.label(class="form-label") }} {{ driver_form.last_name(class="form-control") }}
+	</div>
+
+	<div class="mb-3">
+		{{ driver_form.license_type.label(class="form-label") }} {{ driver_form.license_type(class="form-control") }}
+	</div>
+	<div class="mb-3">
+		{{ driver_form.license_exp.label(class="form-label") }} {{ driver_form.license_exp(class="form-control") }}
+	</div>
+	<div class="mb-3">
+		{{ driver_form.dot_exp.label(class="form-label") }} {{ driver_form.dot_exp(class="form-control") }}
+	</div>
+	<div class="mb-3">
+		{{ driver_form.dc_id.label(class="form-label") }} {{ driver_form.dc_id(class="form-control") }}
+	</div>
+
+	<div class="text-end"><button type="submit" class="btn btn-success">Create</button></div>
+</form>

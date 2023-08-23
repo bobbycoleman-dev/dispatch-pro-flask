@@ -1,0 +1,58 @@
+{% extends '/shared/base.html' %} {% block content %} {% include '/shared/navbar.html' %}
+
+<div class="container overflow-scroll pt-5 ps-5" style="height: 100vh">
+	<h3 class="text-end mb-5">Distribution Center Settings</h3>
+	<div class="row mb-3">
+		<div class="col">
+			<div class="card shadow">
+				<div class="card-header">All Distribution Centers</div>
+				<div class="card-body">
+					<table class="table table-dark table-hover text-center">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Address</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for dc in dcs %}
+							<tr>
+								<td>{{dc.nickname}}</td>
+								<td>{{dc.street}}, {{dc.city}}, {{dc.state}} {{dc.zip_code}}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card shadow">
+				<div class="card-header">Add DC</div>
+				<div class="card-body">
+					<form action="/dcs/create" method="post">
+						{{ form.csrf_token }}
+						<div class="mb-3">
+							{{ form.nickname.label(class="form-label") }} {{ form.nickname(class="form-control") }}
+						</div>
+						<div class="mb-3">
+							{{ form.street.label(class="form-label") }} {{ form.street(class="form-control") }}
+						</div>
+						<div class="mb-3">
+							{{ form.city.label(class="form-label") }} {{ form.city(class="form-control") }}
+						</div>
+						<div class="mb-3">
+							{{ form.state.label(class="form-label") }} {{ form.state(class="form-control") }}
+						</div>
+						<div class="mb-3">
+							{{ form.zip_code.label(class="form-label") }} {{ form.zip_code(class="form-control") }}
+						</div>
+						<div class="text-end"><button type="submit" class="btn btn-success">Create</button></div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

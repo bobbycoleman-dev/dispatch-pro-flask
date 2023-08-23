@@ -1,0 +1,19 @@
+<form action="/assets/create/truck" method="post">
+	{{ truck_form.csrf_token }}
+	<div class="mb-3">
+		{{ truck_form.number.label(class="form-label") }} {{ truck_form.number(class="form-control") }}
+	</div>
+	<div class="mb-3">{{ truck_form.make.label(class="form-label") }} {{ truck_form.make(class="form-control") }}</div>
+	<div class="mb-3">
+		{{ truck_form.model.label(class="form-label") }} {{ truck_form.model(class="form-control") }}
+	</div>
+	<div class="mb-3">{{ truck_form.year.label(class="form-label") }} {{ truck_form.year(class="form-control") }}</div>
+	<div class="mb-3">{{ truck_form.vin.label(class="form-label") }} {{ truck_form.vin(class="form-control") }}</div>
+	<div class="mb-3">
+		{{ truck_form.dc_id.label(class="form-label") }} {{ truck_form.dc_id(class="form-control") }}
+	</div>
+	<div class="mb-3">
+		{{ truck_form.driver_id.label(class="form-label") }} {{ truck_form.driver_id(class="form-control") }}
+	</div>
+	<div class="text-end"><button type="submit" class="btn btn-success">Create</button></div>
+</form>

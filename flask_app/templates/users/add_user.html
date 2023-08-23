@@ -1,0 +1,13 @@
+<form action="/auth/register" method="post">
+	{{ form.csrf_token }}
+	<div class="mb-3">{{ form.first_name.label(class="form-label") }} {{ form.first_name(class="form-control") }}</div>
+	<div class="mb-3">{{ form.last_name.label(class="form-label") }} {{ form.last_name(class="form-control") }}</div>
+	<div class="mb-3">{{ form.email.label(class="form-label") }} {{ form.email(class="form-control") }}</div>
+	<div class="mb-3">{{ form.dc_id.label(class="form-label") }} {{ form.dc_id(class="form-control") }}</div>
+	<div class="mb-3">{{ form.role.label(class="form-label") }} {{ form.role(class="form-control") }}</div>
+	<div class="mb-3">{{ form.password.label(class="form-label") }} {{ form.password(class="form-control") }}</div>
+	<div class="mb-3">
+		{{ form.confirm_password.label(class="form-label") }} {{ form.confirm_password(class="form-control") }}
+	</div>
+	<div class="text-end"><button type="submit" class="btn btn-success">Create</button></div>
+</form>

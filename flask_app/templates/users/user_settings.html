@@ -1,0 +1,43 @@
+{% extends '/shared/base.html' %} {% block content %} {% include '/shared/navbar.html' %}
+
+<div class="container overflow-scroll pt-5 ps-5" style="height: 100vh">
+	<h3 class="text-end mb-5">Company User Settings</h3>
+	<div class="row mb-3">
+		<div class="col">
+			<div class="card shadow">
+				<div class="card-header">All Users</div>
+				<div class="card-body">
+					<table class="table table-dark table-hover text-center">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Location</th>
+								<th>Role</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for user in users %}
+							<tr>
+								<td>{{user.first_name}} {{user.last_name}}</td>
+								<td>{{user.user_dc.nickname}}</td>
+								<td>
+									{% for role_id in roles %} {% if user.role in role_id %} {{ role_id[user.role] }} {%
+									endif %} {% endfor %}
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="card shadow">
+				<div class="card-header">Add User</div>
+				<div class="card-body">{% include '/users/add_user.html' %}</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
