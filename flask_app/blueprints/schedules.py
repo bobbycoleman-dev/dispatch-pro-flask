@@ -1,18 +1,29 @@
-from flask import Blueprint, flash, render_template, redirect, request, session
+from datetime import date
+from flask import Blueprint, render_template, redirect, request, jsonify
 from flask_app.forms.schedule import ScheduleForm
+from flask_app.forms.delivery import DeliveryForm
 from flask_app.models.schedule import Schedule
+from flask_app.models.delivery import Delivery
+from flask_app.models.customer import Customer
+from flask_app.models.address import Address
 from flask_app.models.truck import Truck
 from flask_login import current_user
 from flask_app.extensions import db
 from flask_app.models.dc_region import DCRegion
 
 bp = Blueprint("schedules", __name__)
+today = date.today()
 
 
 @bp.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
     trucks = Truck.query.filter(Truck.dc_id == current_user.dc_id)
-    schedules = Schedule.query.filter(Truck.dc_id == current_user.dc_id)
+    schedules = Schedule.query.join(Schedule.truck).filter(
+        Truck.dc_id == current_user.dc_id
+    )
+    customers = Customer.query.filter(Customer.dc_id == current_user.dc_id)
+    addresses = Address.query.all()
+    deliveries = Delivery.query.all()
     regions = DCRegion().south
     current_user.region = (
         "south" if current_user.user_dc.state in regions else "northeast"
@@ -50,9 +61,84 @@ def dashboard():
         db.session.commit()
         return redirect("/dashboard")
 
+    delivery_form = DeliveryForm(date=today)
+    customer_choices = []
+    for customer in customers:
+        customer_choices.append(customer)
+    delivery_form.customer_id.choices = [
+        (int(customer.id), customer.company_name) for customer in customer_choices
+    ]
+
+    delivery_form.truck.choices = [
+        (int(schedule.id), schedule.truck.number) for schedule in schedules
+    ]
+
+    delivery_form.address_id.choices = [
+        (
+            int(address.id),
+            f"{address.street}, {address.city}, {address.state} {address.zip_code}",
+        )
+        for address in addresses
+    ]
+
+    if delivery_form.validate_on_submit():
+        date = request.form.get("date")
+        is_first_run = request.form.get("is_first_run")
+        stop_num = request.form.get("stop_num")
+        customer_id = request.form.get("customer_id")
+        address_id = request.form.get("address_id")
+        schedule_id = request.form.get("schedule_id")
+
+        new_delivery = Delivery(
+            date=date,
+            is_first_run=is_first_run,
+            stop_num=stop_num,
+            customer_id=customer_id,
+            address_id=address_id,
+            schedule_id=schedule_id,
+        )
+        db.session.add(new_delivery)
+        db.session.commit()
+        return redirect("/dashboard")
+
     return render_template(
         "/schedule/dashboard.html",
         schedule_form=schedule_form,
+        delivery_form=delivery_form,
         schedules=schedules,
         trucks=trucks,
+        deliveries=deliveries,
+        addresses=addresses,
     )
+
+
+@bp.post("/create/delivery")
+def create_delivery():
+    date = request.form.get("date")
+    truck = request.form.get("truck")
+    is_first_run = request.form.get("is_first_run")
+    day = request.form.get("day")
+    stop_num = request.form.get("stop_num")
+    customer_id = request.form.get("customer_id")
+    address_id = request.form.get("address_id")
+
+    new_delivery = Delivery(
+        date=date,
+        is_first_run=is_first_run,
+        stop_num=day + stop_num,
+        customer_id=customer_id,
+        address_id=address_id,
+        schedule_id=truck,
+    )
+    db.session.add(new_delivery)
+    db.session.commit()
+    return jsonify(new_delivery.to_dict())
+
+
+@bp.route("/deliveries")
+def get_deliveries():
+    deliveries = Delivery.query.all()
+    results = []
+    for delivery in deliveries:
+        results.append(delivery.to_dict())
+    return jsonify(results)

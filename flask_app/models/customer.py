@@ -1,10 +1,11 @@
 from flask_app.extensions import db
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
+from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
 
-class Customer(db.Model):
+class Customer(db.Model, SerializerMixin):
     __tablename__ = "customers"
     query = db.session.query_property()
 

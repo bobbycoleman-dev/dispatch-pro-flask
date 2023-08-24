@@ -11,7 +11,7 @@ class RegisterForm(FlaskForm):
     role = SelectField(
         "Role:",
         choices=[
-            (9, "--Please select a Location--"),
+            (9, "--Please select a Role--"),
             (1, "Admin"),
             (2, "Regional"),
             (3, "Dispatcher"),

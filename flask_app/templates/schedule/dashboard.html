@@ -22,6 +22,9 @@
 			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#creat-schedule">
 				Create Schedule
 			</button>
+			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#creat-delivery">
+				Schedule a Delivery
+			</button>
 			<button class="btn btn-success">Share <i class="bi-box-arrow-up-right"></i></button>
 		</div>
 		{% include '/schedule/schedule.html' %}
@@ -65,6 +68,50 @@
 					</div>
 					<div class="text-end">
 						<button type="submit" class="btn btn-success" data-bs-dismiss="modal">Create</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{# CREATE DELIVERY MODAL #}
+<div class="modal fade" id="creat-delivery" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="create-del-label">Schedule Delivery</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form method="post" id="delivery-form">
+					{{ delivery_form.csrf_token }} {{delivery_form.date}}
+					<input type="hidden" name="schedule_id" value=" " />
+					<div class="mb-3">
+						{{ delivery_form.truck.label(class="form-label") }} {{ delivery_form.truck(class="form-control")
+						}}
+					</div>
+					<div class="mb-3">
+						{{ delivery_form.is_first_run.label(class="form-label") }} {{
+						delivery_form.is_first_run(class="form-control") }}
+					</div>
+					<div class="mb-3">
+						{{ delivery_form.day.label(class="form-label") }} {{ delivery_form.day(class="form-control") }}
+					</div>
+					<div class="mb-3">
+						{{ delivery_form.stop_num.label(class="form-label") }} {{
+						delivery_form.stop_num(class="form-control") }}
+					</div>
+					<div class="mb-3">
+						{{ delivery_form.customer_id.label(class="form-label") }} {{
+						delivery_form.customer_id(class="form-control") }}
+					</div>
+					<div class="mb-3">
+						{{ delivery_form.address_id.label(class="form-label") }} {{
+						delivery_form.address_id(class="form-control") }}
+					</div>
+					<div class="text-end">
+						<button type="submit" class="btn btn-success" data-bs-dismiss="modal">Schedule</button>
 					</div>
 				</form>
 			</div>

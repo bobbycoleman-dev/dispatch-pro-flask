@@ -13,6 +13,7 @@ email-validator = "*"
 flask-sqlalchemy = "*"
 flask-login = "*"
 phonenumbers = "*"
+sqlalchemy-serializer = "*"
 
 [dev-packages]
 
