@@ -80,9 +80,7 @@ def asset_settings():
                 DistributionCenter.region == "Northeast"
             )
     else:
-        trucks = Truck.query.filter(Truck.dc_id == current_user.user_dc.id).order_by(
-            Truck.truck_dc.nickname
-        )
+        trucks = Truck.query.filter(Truck.dc_id == current_user.user_dc.id)
         drivers = Driver.query.filter(Driver.dc_id == current_user.user_dc.id)
 
     return render_template(
