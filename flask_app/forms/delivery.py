@@ -5,6 +5,7 @@ from wtforms.validators import DataRequired
 
 class DeliveryForm(FlaskForm):
     date = HiddenField()
+    dc_id = HiddenField()
     truck = SelectField("Truck:")
     is_first_run = SelectField(
         "First or Second Run:",

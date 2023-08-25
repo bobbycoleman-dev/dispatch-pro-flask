@@ -1,3 +1,4 @@
+from pprint import pprint
 from datetime import date
 from flask import Blueprint, render_template, redirect, request, jsonify
 from flask_app.forms.schedule import ScheduleForm
@@ -17,7 +18,6 @@ today = date.today()
 
 @bp.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
-    get_deliveries()
     trucks = Truck.query.filter(Truck.dc_id == current_user.dc_id)
     schedules = Schedule.query.join(Schedule.truck).filter(
         Truck.dc_id == current_user.dc_id
@@ -31,7 +31,10 @@ def dashboard():
     )
 
     schedule_form = ScheduleForm(
-        first_run_stops=4, has_second_runs=1, second_run_stops=3
+        first_run_stops=4,
+        has_second_runs=1,
+        second_run_stops=3,
+        dc_id=current_user.dc_id,
     )
     truck_choices = []
     for truck in trucks:
@@ -45,6 +48,7 @@ def dashboard():
     ]
 
     if schedule_form.validate_on_submit():
+        dc_id = request.form.get("dc_id")
         start_date = request.form.get("start_date")
         first_run_stops = request.form.get("first_run_stops")
         has_second_runs = request.form.get("has_second_runs")
@@ -52,6 +56,7 @@ def dashboard():
         truck_id = request.form.get("truck_id")
 
         new_schedule = Schedule(
+            dc_id=dc_id,
             start_date=start_date,
             first_run_stops=first_run_stops,
             has_second_runs=has_second_runs,
@@ -62,7 +67,7 @@ def dashboard():
         db.session.commit()
         return redirect("/dashboard")
 
-    delivery_form = DeliveryForm(date=today)
+    delivery_form = DeliveryForm(date=today, dc_id=current_user.dc_id)
     customer_choices = []
     for customer in customers:
         customer_choices.append(customer)
@@ -83,6 +88,7 @@ def dashboard():
     ]
 
     if delivery_form.validate_on_submit():
+        dc_id = request.form.get("dc_id")
         date = request.form.get("date")
         is_first_run = request.form.get("is_first_run")
         stop_num = request.form.get("stop_num")
@@ -91,6 +97,7 @@ def dashboard():
         schedule_id = request.form.get("schedule_id")
 
         new_delivery = Delivery(
+            dc_id=dc_id,
             date=date,
             is_first_run=is_first_run,
             stop_num=stop_num,
@@ -115,6 +122,7 @@ def dashboard():
 
 @bp.post("/create/delivery")
 def create_delivery():
+    dc_id = request.form.get("dc_id")
     date = request.form.get("date")
     truck = request.form.get("truck")
     is_first_run = request.form.get("is_first_run")
@@ -124,6 +132,7 @@ def create_delivery():
     address_id = request.form.get("address_id")
 
     new_delivery = Delivery(
+        dc_id=dc_id,
         date=date,
         is_first_run=is_first_run,
         stop_num=day + stop_num,
@@ -136,10 +145,11 @@ def create_delivery():
     return jsonify(new_delivery.to_dict())
 
 
-@bp.route("/deliveries")
+@bp.get("/deliveries")
 def get_deliveries():
-    deliveries = Delivery.query.all()
+    deliveries = Delivery.query.filter(Delivery.dc_id == current_user.dc_id)
     results = []
     for delivery in deliveries:
         results.append(delivery.to_dict())
+    pprint(deliveries)
     return jsonify(results)

@@ -1,5 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SelectField, RadioField, DateField
+from wtforms import (
+    StringField,
+    IntegerField,
+    SelectField,
+    RadioField,
+    DateField,
+    HiddenField,
+)
 from wtforms.validators import DataRequired, Length
 
 
@@ -15,3 +22,4 @@ class ScheduleForm(FlaskForm):
         "Second Run Stop Count:", validators=[DataRequired()]
     )
     truck_id = SelectField("Assigned Truck:")
+    dc_id = HiddenField()

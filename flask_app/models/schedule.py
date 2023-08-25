@@ -16,5 +16,6 @@ class Schedule(db.Model, SerializerMixin):
     second_run_stops = Column(Integer, default=3)
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
+    dc_id = Column(Integer, ForeignKey("distribution_centers.id"), nullable=False)
     truck_id = Column(Integer, ForeignKey("trucks.id"), nullable=False)
     truck = relationship("Truck", backref="schedules")

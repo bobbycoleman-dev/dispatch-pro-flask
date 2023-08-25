@@ -18,6 +18,7 @@ class Delivery(db.Model, SerializerMixin):
     schedule_id = Column(Integer, ForeignKey("schedules.id"), nullable=False)
     customer_id = Column(Integer, ForeignKey("customers.id"), nullable=False)
     address_id = Column(Integer, ForeignKey("addresses.id"), nullable=False)
+    dc_id = Column(Integer, ForeignKey("distribution_centers.id"), nullable=False)
     customer = relationship("Customer", backref="deliveries")
     # schedule = relationship("Schedule", backref="deliveries")
     address = relationship("Address", backref="deliveries")

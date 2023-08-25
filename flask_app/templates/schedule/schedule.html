@@ -24,8 +24,8 @@
 		</div>
 	</div>
 	<div class="row border border-dark"><div class="col-text-center bg-primary">First Runs</div></div>
-	{% for row in range(schedule.first_run_stops) %}
 
+	{% for row in range(schedule.first_run_stops) %}
 	<div class="row">
 		{% for col in range(6) %}
 		<div
@@ -34,7 +34,6 @@
 			style="min-height: 50px; cursor: pointer"></div>
 		{% endfor %}
 	</div>
-
 	{% endfor %}
 
 	<div class="row border border-dark"><div class="col-text-center bg-primary">Second Runs</div></div>
@@ -54,5 +53,3 @@
 </div>
 
 {% endfor %}
-
-<script async></script>

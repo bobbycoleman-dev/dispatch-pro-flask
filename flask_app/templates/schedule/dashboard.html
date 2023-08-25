@@ -41,7 +41,7 @@
 			</div>
 			<div class="modal-body">
 				<form action="/dashboard" method="post">
-					{{ schedule_form.csrf_token }}
+					{{ schedule_form.csrf_token }} {{schedule_form.dc_id}}
 					<div class="mb-3">
 						{{ schedule_form.truck_id.label(class="form-label") }} {{
 						schedule_form.truck_id(class="form-control") }}
@@ -87,7 +87,7 @@
 			</div>
 			<div class="modal-body">
 				<form method="post" id="delivery-form">
-					{{ delivery_form.csrf_token }} {{delivery_form.date}}
+					{{ delivery_form.csrf_token }} {{delivery_form.date}} {{delivery_form.dc_id}}
 					<input type="hidden" name="schedule_id" value=" " />
 					<div class="mb-3">
 						{{ delivery_form.truck.label(class="form-label") }} {{ delivery_form.truck(class="form-control")
