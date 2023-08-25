@@ -22,7 +22,7 @@ def register():
     """Displays the register page."""
 
     form = RegisterForm()
-    form.dc_id.choices.append = [
+    form.dc_id.choices = [
         (int(dc.id), dc.nickname) for dc in DistributionCenter.query.all()
     ]
 
