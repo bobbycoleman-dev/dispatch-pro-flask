@@ -6,7 +6,10 @@ deliveryForm.onsubmit = function (e) {
 
 	fetch("http://127.0.0.1:5000/create/delivery", { method: "POST", body: form })
 		.then((response) => response.json())
-		.then((data) => populateCell(data));
+		.then((data) => {
+			populateCell(data);
+			getDeliveries();
+		});
 };
 
 function getDeliveries() {

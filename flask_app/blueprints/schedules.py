@@ -17,6 +17,7 @@ today = date.today()
 
 @bp.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
+    get_deliveries()
     trucks = Truck.query.filter(Truck.dc_id == current_user.dc_id)
     schedules = Schedule.query.join(Schedule.truck).filter(
         Truck.dc_id == current_user.dc_id
