@@ -100,21 +100,19 @@ So, with customer satisfaction and organizational readiness and efficiency in mi
 <p align="center"><img src="https://github.com/bobbycoleman-dev/dispatch-pro-flask/blob/main/screenshots/create-dc-view.jpg" alt="create-dc" width="400"/> <img src="https://github.com/bobbycoleman-dev/dispatch-pro-flask/blob/main/screenshots/creat-user-view.jpg" alt="create-users" width="400"/></p>
 
 <p align="center">Slide-in Sidebar Nav</p>
-<p align="center"><img src="https://github.com/bobbycoleman-dev/dispatch-pro-flask/blob/main/screenshots/sidebar-nav.jpg" alt="sidebar-nav" width="400"/> <img src="https://github.com/bobbycoleman-dev/array-v2/blob/main/screenshots/responsive-tablet.jpg" alt="array-banner" width="250"/></p>
+<p align="center"><img src="https://github.com/bobbycoleman-dev/dispatch-pro-flask/blob/main/screenshots/sidebar-nav.jpg" alt="sidebar-nav" width="400"/> </p>
 
 ---
 
 ## Functionality
 
-When first visiting the site, you are brought to the Login screen if you have an account, or you can travel to the Registration screen to create an account. The registration form takes your full name, a selected (unique) username, your email, and password/confirm password. After successfully registering, you are taken to the login screen to login in.
+After a company Admin has been created by Dispatch Pro, the Admin can create Distribution Centers (DC) for their organization and create company users and assign them to their respective DC. Once a user has an account, they can login with their default password and they will be greeted with their blank schedule dashboard.
 
-After logging in, your information is stored in your personal browser local storage to maintain your login state even after closing the browser, and you are brought to the home screen which features a navigation on the left, users and trending languages on the right, and the main post feed in the middle.
+From the dashboard, the user can navigate to the Vehicles/Drivers tab and begin adding their DC Vehicle and Driver information, first creating Drivers so they can then have a Truck assigned to them. Admins can create Trucks and Drivers for the whole company should they choose, Regionals can do the same for the DC's in their Region (i.e. South, Northeast, West, etc.), and Dispatchers can do the same for their assigned DC.
 
-From the home screen, a user can post code, traverse to their personal profile, view other user profiles, and search all posts in the [Array] array.
+Next, users can navigate to the Customers tab and begin adding in their customers first, then creating addresses for those specific customers.
 
-A user can view a single post, like that post, and comment on that post. A user can also follow other users and view their own followers.
-
-Because [Array] is fully responsive, a user can also view posts and make posts from their tablet or mobile device.
+Once the Drivers, Trucks, and Customers are created, the user then can begin creating weekly schedules for each truck and begin scheduling deliveries.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -122,11 +120,9 @@ Because [Array] is fully responsive, a user can also view posts and make posts f
 
 ## Design
 
-I wanted to take a mobile-first approach to my design while also ensuring it can be comfortably viewed on larger screens and in light or dark mode.
+My design approach was minimalistic. Keeping in mind that the target audience (smaller, busy distribution companies that make multiple local deliveries daily) may not have the time or resources to figure out how to use a large application with many features they do not necessarily need.
 
-The light mode design has a subtle white to light gray gradient, while the dark mode design has a pleasing blueish green gradient with light green primary colors. Dark mode also features a dark gray code block, making the syntax highlighting easy to read.
-
-The layout of [Array] intentionally leaves the left and right sections static while changing the middle section to display the information the user wants to view such as the feed, a single post, or theirs and other users profiles.
+The main focal point of the application is the delivery schedule, so developing a simple,clean, and unobstructed weekly view of a the DCs truck schedules was critical. Additionally, once the users spend the extra time on the front-end creating customers, trucks, and drivers, the rest of their time will be spent on the schedule dashboard screen. Lastly, creating a sliding navbar with icons was essential for ensuring full screen real estate for the schedule.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -134,30 +130,6 @@ The layout of [Array] intentionally leaves the left and right sections static wh
 
 ## Running Locally
 
-1. You will need a MongoDB account, I used [Atlas](https://www.mongodb.com/cloud/atlas/register)
-2. You will need a [Firebase](https://firebase.google.com/) account to set up Authentication
-3. Clone the repository, run `npm i` to install dependencies
-4. Create a `.env` file for both the server and the client
-5. Server side `.env` file will need:
-
-    ```env
-    PORT=8000
-    MONGODB_URI=mongodb+srv://{username}:{password}{db_conection_string}?retryWrites=true&w=majority
-    ```
-
-6. Client side `.env` file will need (for Firebase authentication):
-
-    ```env
-    # All values auto-generated when creating a Firebase application
-    VITE_FIREBASE_APIKEY= {firebase_api_key}
-    VITE_FIREBASE_AUTH_DOMAIN= {firebase_auth_domain}
-    VITE_FIREBASE_PROJECT_ID= {project_id}
-    VITE_FIREBASE_STORAGE_BUCKET= {storage_bucket}
-    VITE_FIREBASE_MESSAGING_SENDER_ID= {messaging_sender_id}
-    VITE_FIREBASE_APP_ID= {app_id}
-    ```
-
-7. Open server in terminal, run `nodemon server.js` to start server
-8. Open client in terminal, run `npm run dev` to start client
+TBD
 
 [Return to Table of Contents](#table-of-contents)
