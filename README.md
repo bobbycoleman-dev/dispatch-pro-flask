@@ -1,7 +1,7 @@
 <h1 align="center">Dispatch Pro</h1>
 <h3 align="center">A delivery schedule dispatching tool</h3>
 
-<p align="center"><img src="https://github.com/bobbycoleman-dev/dispatch-pro-flask/blob/main/screenshots/dp-banner.png" alt="dispatch-pro-banner" align="center"/></p>
+<p align="center"><img src="https://github.com/bobbycoleman-dev/dispatch-pro-flask/blob/main/screenshots/dispatch-pro-banner.jpeg" alt="dispatch-pro-banner" align="center"/></p>
 
 ---
 
